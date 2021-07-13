@@ -1,0 +1,26 @@
+.app-header {
+    height: 420px;
+
+    .hero {
+        height: 256px;
+        background-color: lightgray;
+    }
+
+    .img-container {
+        @include flex-center;
+        position: absolute;
+        top: 94px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 326px;
+        height: 326px;
+        border-radius: 50%;
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, .22);
+        background-color: white;
+
+        img {
+            // position: absolute;
+            width: 360px;
+        }
+    }
+}

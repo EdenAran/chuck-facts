@@ -1,0 +1,22 @@
+.nav-bar {
+    @include flex-center;
+    margin-top: 64px;
+    font-size: 0.9375rem;
+    a {
+        @include flex-center;
+        width: 120px;
+        height: 40px;
+        color: rgb(241, 90, 36);
+        border: 1px solid rgb(241, 90, 36);
+        border-radius:  0 3px 3px 0;
+
+        &:first-child {
+            border-radius: 3px 0 0 3px;
+        }
+
+        &.active {
+            background-color: rgb(241, 90, 36);
+            color: white
+        }
+    }
+}
