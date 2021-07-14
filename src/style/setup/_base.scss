@@ -5,13 +5,12 @@
 html {
     font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     line-height: 1.8;
-    overflow-y: hidden;
 }
 
 body {
     margin: 0;
     height: 100vh;
-    background-color: rgb(251, 252, 255);
+    background-color: #fbfcff;
 }
 
 h1,
@@ -26,7 +25,7 @@ h6 {
 }
 
 p {
-    margin: 0 0 1em;
+    margin: 0 0;
     max-width: 54ch;
 }
 

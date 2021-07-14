@@ -1,23 +1,30 @@
 import { useState } from "react";
+import { FactsList } from "../cmps/FactsList";
 import { SearchBox } from "../cmps/SerchBox"
 import { factService } from "../services/fact.service";
 
 export const Search = () => {
-
-    const [facts, setFacts] = useState([]);
-    const [searchParams, setSearchParams] = useState([]);
+    const [facts, setFacts] = useState();
+    const [searchParams, setSearchParams] = useState();
 
     const handleChange = ({ target }) => {
         const values = target.value;
-        // const values = target.value.split(',');
-        console.log('value:', values)
         setSearchParams(values);
     }
 
     const searchFacts = async (ev) => {
         ev.preventDefault();
-        const newFacts = await factService.getFacts(searchParams);
-        // setFacts({ ...facts, ...newFacts });
+        let newFacts = await factService.getFacts(searchParams);
+        newFacts = newFacts.result.sort((f1, f2) => {
+            return f1.created_at.localeCompare(f2.created_at)
+        });
+        setFacts([...newFacts]);
+    }
+    const sortFacts = (diff) => {
+        const newFacts = facts.sort((f1, f2) => {
+            return f1.created_at.localeCompare(f2.created_at) * diff
+        });
+        setFacts([...newFacts]);
     }
 
     const isButtonActive = () => {
@@ -32,7 +39,7 @@ export const Search = () => {
                     <input name="search" type="text" placeholder="e.g egg, break, Chuck Norris, dumb" onChange={handleChange} />
                 </div>
             </SearchBox>
-
+            {facts && <FactsList facts={facts} sort={sortFacts}></FactsList>}
         </main>
     )
 }

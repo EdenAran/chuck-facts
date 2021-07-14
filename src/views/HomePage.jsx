@@ -2,13 +2,14 @@ import { useEffect, useState } from "react";
 import { SearchBox } from "../cmps/SerchBox"
 import { factService } from '../services/fact.service'
 import Select from "react-select";
-import { FactPreview } from "../cmps/FactsPreview";
+import { FactPreview } from "../cmps/FactPreview";
+import { utilService } from "../services/util.service";
 
 export const HomePage = () => {
 
     const [fact, setFact] = useState();
     const [categories, setCategories] = useState();
-    const [searchParams, setSearchParams] = useState({name:'', category:''});
+    const [searchParams, setSearchParams] = useState({ name: '', category: '' });
 
     useEffect(() => {
         getCategories();
@@ -16,12 +17,9 @@ export const HomePage = () => {
 
     const getCategories = async () => {
         let newCategories = await factService.getCategories();
-        newCategories = newCategories.map(category => ({ value: category, label: capitalize(category) }));
+        newCategories = newCategories.map(category => ({ value: category, label: utilService.capitalize(category) }));
         newCategories.unshift({ value: 'all', label: 'All Categories' })
         setCategories(newCategories);
-    }
-    const capitalize = (str) => {
-        return str.charAt(0).toUpperCase() + str.substring(1);
     }
     const handleChange = (ev) => {
         if (ev.target) {
@@ -30,7 +28,6 @@ export const HomePage = () => {
         }
         else {
             const values = ev.map(option => option.value).join(',')
-            console.log('values:', values)
             setSearchParams({ ...searchParams, category: values });
         }
     }
@@ -38,7 +35,6 @@ export const HomePage = () => {
     const searchFact = async (ev) => {
         ev.preventDefault();
         const newFact = await factService.getRandomFact(searchParams);
-        console.log('newFact:', newFact)
         setFact({ ...fact, ...newFact });
     }
 
@@ -46,9 +42,11 @@ export const HomePage = () => {
         const isActive = searchParams.name.length > 0 && searchParams.category.length;
         return isActive;
     }
+
     const isOptionDisabled = (option) => {
         return (option.value === 'all' && searchParams.category.length) || (option.value !== 'all' && searchParams.category.includes('all'))
     }
+
     return (
         <main className="home-page main-layout">
             <SearchBox searchFact={searchFact} isActive={isButtonActive()}>
@@ -61,18 +59,18 @@ export const HomePage = () => {
                         <label name="category">Category</label>
                         <Select
                             hideSelectedOptions={false}
-                            isMulti 
-                            name="category" 
-                            className="select" 
-                            placeholder="Pick a category" 
+                            isMulti
+                            name="category"
+                            className="select"
+                            placeholder="Pick a category"
                             isOptionDisabled={isOptionDisabled}
-                            options={categories} 
+                            options={categories}
                             onChange={handleChange} >
                         </Select>
                     </span>
                 </div>
             </SearchBox>
-            <FactPreview fact={fact?.value}></FactPreview>
+            {fact && <FactPreview fact={fact.value}></FactPreview>}
         </main>
     )
 }
