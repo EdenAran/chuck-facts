@@ -6,25 +6,28 @@ import { factService } from "../services/fact.service";
 export const Search = () => {
     const [facts, setFacts] = useState();
     const [searchParams, setSearchParams] = useState();
+    const [diff, setDiff] = useState(1);
 
     const handleChange = ({ target }) => {
         const values = target.value;
         setSearchParams(values);
     }
 
-    const searchFacts = async (ev) => {
+    const getFacts = async (ev) => {
         ev.preventDefault();
-        let newFacts = await factService.getFacts(searchParams);
-        newFacts = newFacts.result.sort((f1, f2) => {
-            return f1.created_at.localeCompare(f2.created_at)
-        });
-        setFacts([...newFacts]);
+        try {
+            const newFacts = await factService.getFacts(searchParams);
+            console.log('newFacts:', newFacts)
+            setFacts(newFacts.result);
+        } catch (err) {
+            console.log('Error getting facts:', err.response.data.message);
+        }
     }
-    const sortFacts = (diff) => {
-        const newFacts = facts.sort((f1, f2) => {
+
+    const factsToShow = () => {
+        return facts.sort((f1, f2) => {
             return f1.created_at.localeCompare(f2.created_at) * diff
         });
-        setFacts([...newFacts]);
     }
 
     const isButtonActive = () => {
@@ -33,13 +36,13 @@ export const Search = () => {
 
     return (
         <main className="search main-layout">
-            <SearchBox searchFact={searchFacts} isActive={isButtonActive()}>
+            <SearchBox searchFact={getFacts} isActive={isButtonActive()}>
                 <div className="search">
                     <label>Key Word(s):</label>
                     <input name="search" type="text" placeholder="e.g egg, break, Chuck Norris, dumb" onChange={handleChange} />
                 </div>
             </SearchBox>
-            {facts && <FactsList facts={facts} sortFacts={sortFacts}></FactsList>}
+            {facts?.length > 0 && <FactsList facts={factsToShow()} setFilter={() => setDiff(diff * -1)} diff={diff} ></FactsList>}
         </main>
     )
 }

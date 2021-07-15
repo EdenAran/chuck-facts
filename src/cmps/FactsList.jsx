@@ -1,16 +1,11 @@
-import { utilService } from "../services/util.service"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { FactPreview } from "./FactPreview"
+import { utilService } from "../services/util.service"
 import Moment from "react-moment"
 
-export const FactsList = ({ facts, sortFacts }) => {
-    const [diff, setDiff] = useState(1);
-    const [selectedFact, setSelectedFact] = useState(null);
+export const FactsList = ({ facts, setFilter, diff }) => {
 
-    useEffect(() => {
-        sortFacts(diff);
-        // eslint-disable-next-line
-    }, [diff])
+    const [selectedFact, setSelectedFact] = useState(null);
 
     const selectFact = (fact) => {
         if (selectedFact?.id === fact.id) {
@@ -37,7 +32,7 @@ export const FactsList = ({ facts, sortFacts }) => {
                 </span>
                 <span className="date header">
                     Date Created
-                    <img className={diff > 0 ? '' : 'up'} src={require('../assets/img/arrow.svg').default} onClick={() => setDiff(diff * -1)} alt="sort" />
+                    <img className={(diff > 0) ? '' : 'up'} src={require('../assets/img/arrow.svg').default} onClick={setFilter} alt="sort" />
                     <img src={require('../assets/img/filter.svg').default} alt="filter" />
                 </span>
             </div>

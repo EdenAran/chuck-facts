@@ -3,6 +3,7 @@
     grid-row: 3;
     width: 1000px;
     padding: 28px 32px 0;
+    margin-bottom: 25px;
     font-size: 0.8125rem;
     line-height: 1.538;
     color: #16303c;
@@ -12,7 +13,7 @@
         align-items: center;
 
         img {
-            margin-left: 6px;
+            margin-left: 5px;
             width: 13px;
             height: 14px;
 
@@ -20,13 +21,14 @@
                 transform: rotate(180deg);
             }
 
-            &:first-of-type {
+            &:first-child {
                 margin-left: 12px;
+
+                &:hover:not(:only-child) {
+                    cursor: pointer;
+                }
             }
 
-            &:hover {
-                cursor: pointer;
-            }
         }
     }
 
@@ -62,7 +64,7 @@
             grid-column: 1 / -1;
             background-color: #eff4f7;
             padding: 52px 144px 52px 144px;
-            transition: .3s ;
+            transition: .3s;
 
             .img-container {
                 background-color: #eff4f7;
@@ -72,7 +74,7 @@
                 height: 0;
                 padding-top: 0;
                 padding-bottom: 0;
-                
+
                 >* {
                     display: none;
                 }

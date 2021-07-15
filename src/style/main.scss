@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+
 // SETUP
 @import 'setup/mixins';
 @import 'setup/base';
@@ -11,5 +13,3 @@
 @import 'cmps/FactsList';
 @import 'cmps/FactPreview';
 
-// VIEWS
-@import 'views/HomePage';
