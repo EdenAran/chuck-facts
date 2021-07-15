@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { SearchBox } from "../cmps/SerchBox"
 import { factService } from '../services/fact.service'
 import Select from "react-select";
@@ -7,20 +7,25 @@ import { utilService } from "../services/util.service";
 
 export const HomePage = () => {
 
-    const [fact, setFact] = useState();
-    const [categories, setCategories] = useState();
+    const [fact, setFact] = useState(null);
+    const [categories, setCategories] = useState(null);
     const [searchParams, setSearchParams] = useState({ name: '', category: '' });
+    const selectRef = useRef(null);
 
     useEffect(() => {
+        //Fixes UI bug from react-select library
+        selectRef.current.focus()
+        selectRef.current.blur()
         getCategories();
     }, [])
 
     const getCategories = async () => {
         let newCategories = await factService.getCategories();
         newCategories = newCategories.map(category => ({ value: category, label: utilService.capitalize(category) }));
-        newCategories.unshift({ value: 'all', label: 'All Categories' })
+        newCategories.unshift({ value: 'all', label: 'All Categories' });
         setCategories(newCategories);
     }
+
     const handleChange = (ev) => {
         if (ev.target) {
             const value = ev.target.value;
@@ -35,11 +40,11 @@ export const HomePage = () => {
     const searchFact = async (ev) => {
         ev.preventDefault();
         const newFact = await factService.getRandomFact(searchParams);
-        setFact({ ...fact, ...newFact });
+        setFact(newFact);
     }
 
     const isButtonActive = () => {
-        const isActive = searchParams.name.length > 0 && searchParams.category.length;
+        const isActive = searchParams.name.length && searchParams.category.length;
         return isActive;
     }
 
@@ -58,15 +63,16 @@ export const HomePage = () => {
                     <span className="search-category">
                         <label name="category">Category</label>
                         <Select
+                            placeholder={<span className="placeholder">Pick a category</span>}
+                            ref={selectRef}
                             hideSelectedOptions={false}
                             isMulti
                             name="category"
                             className="select"
-                            placeholder="Pick a category"
                             isOptionDisabled={isOptionDisabled}
                             options={categories}
-                            onChange={handleChange} >
-                        </Select>
+                            onChange={handleChange}
+                        />
                     </span>
                 </div>
             </SearchBox>

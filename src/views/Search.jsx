@@ -39,7 +39,7 @@ export const Search = () => {
                     <input name="search" type="text" placeholder="e.g egg, break, Chuck Norris, dumb" onChange={handleChange} />
                 </div>
             </SearchBox>
-            {facts && <FactsList facts={facts} sort={sortFacts}></FactsList>}
+            {facts && <FactsList facts={facts} sortFacts={sortFacts}></FactsList>}
         </main>
     )
 }

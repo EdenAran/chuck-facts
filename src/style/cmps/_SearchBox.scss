@@ -37,6 +37,15 @@
     .select {
         display: inline-block;
         width: 215px;
+        position: relative;
+
+
+        .placeholder {
+            position: absolute;
+            top: -5px;
+            width: 215px;
+            color: #b3bec2;
+        }
 
         .css-g1d714-ValueContainer {
             width: 215px;
@@ -51,11 +60,6 @@
         .css-1okebmr-indicatorSeparator {
             display: none;
         }
-
-        .css-1wa3eu0-placeholder {
-            color: #b3bec2;
-        }
-
     }
 
     button {
