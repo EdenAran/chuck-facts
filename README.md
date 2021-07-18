@@ -13,7 +13,7 @@ To use the search option, the keywords must be between 3 to 120 characters.
 ## Technology
 This project was created using [Create React App](https://github.com/facebook/create-react-app) and it was built with React and React Hooks.
 
-The project uses [chucknorris.io](https://github.com/chucknorris-io/chuck-api) to retrieve the data.
+The project uses [chucknorris.io](https://github.com/chucknorris-io/chuck-api) to retrieve the data and [axios](https://www.npmjs.com/package/axios) for the requests.
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
