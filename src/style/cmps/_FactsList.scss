@@ -49,7 +49,7 @@
         border-bottom: 1px solid #b3bec2;
         align-items: center;
         grid-template-rows: 44px;
-        transition: .4s;
+        transition: .3s;
 
         span {
             padding-left: 12px;
@@ -59,28 +59,28 @@
             background-color: #e2f4fc;
             grid-template-rows: 44px auto;
         }
-
+        
         .fact-preview {
             grid-column: 1 / -1;
             background-color: #eff4f7;
             padding: 52px 144px 52px 144px;
-            transition: .4s;
-
+            
             .img-container {
                 background-color: #eff4f7;
             }
-
+            
             &.closed {
                 height: 0;
                 padding-top: 0;
                 padding-bottom: 0;
-
+                
                 >* {
                     display: none;
                 }
             }
-
+            
             &.open {
+                transition: .3s;
                 height: auto;
             }
         }

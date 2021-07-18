@@ -84,7 +84,7 @@ export const HomePage = () => {
                     </span>
                 </div>
             </SearchBox>
-            {fact && <FactPreview fact={fact.value}></FactPreview>}
+            {fact && <FactPreview fact={fact.value} ></FactPreview>}
         </main>
     )
 }

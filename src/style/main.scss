@@ -1,10 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
 
 // SETUP
 @import 'setup/mixins';
 @import 'setup/base';
 @import 'setup/layout';
 @import 'setup/scrollbar';
+@import 'setup/fonts';
 
 // CMPS
 @import 'cmps/AppHeader';

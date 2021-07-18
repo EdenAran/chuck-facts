@@ -1,7 +1,8 @@
 .app-header {
     height: 420px;
-
+    
     .hero {
+        padding-left: calc(100vw - 100%);
         height: 256px;
         background-color: #fff2ee;
         img{

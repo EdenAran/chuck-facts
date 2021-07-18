@@ -17,7 +17,6 @@ export const Search = () => {
         ev.preventDefault();
         try {
             const newFacts = await factService.getFacts(searchParams);
-            console.log('newFacts:', newFacts)
             setFacts(newFacts.result);
         } catch (err) {
             console.log('Error getting facts:', err.response.data.message);

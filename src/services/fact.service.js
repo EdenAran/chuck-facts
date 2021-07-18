@@ -20,7 +20,6 @@ async function getRandomFact(filter = {}) {
 
 async function getFacts(query = '') {
     const res = await axios.get(`${BASE_URL}/search`, { headers, params: { query } });
-    console.log('res:', res)
     return res.data;
 }
 
