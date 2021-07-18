@@ -52,8 +52,7 @@ export const HomePage = () => {
     }
 
     const isButtonActive = () => {
-        const isActive = searchParams.name.length && searchParams.category.length;
-        return isActive;
+        return searchParams.name.length && searchParams.category.length;;
     }
 
     const isOptionDisabled = (option) => {

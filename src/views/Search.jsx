@@ -4,8 +4,8 @@ import { SearchBox } from "../cmps/SerchBox"
 import { factService } from "../services/fact.service";
 
 export const Search = () => {
-    const [facts, setFacts] = useState();
-    const [searchParams, setSearchParams] = useState();
+    const [facts, setFacts] = useState(null);
+    const [searchParams, setSearchParams] = useState(null);
     const [diff, setDiff] = useState(1);
 
     const handleChange = ({ target }) => {

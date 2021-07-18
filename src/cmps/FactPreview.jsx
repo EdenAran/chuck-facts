@@ -5,9 +5,9 @@ export const FactPreview = ({ fact, className }) => {
     const factRef = useRef(null);
 
     useEffect(() => {
+        // Scrolling the fact into view when opening it
         if (className === 'closed') return;
         const block = factRef.current.offsetHeight > window.innerHeight ? 'start' : 'center';
-        console.log('block:', block)
         factRef.current?.scrollIntoView({ behavior: 'smooth', block });
     }, [className, fact])
 
